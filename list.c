@@ -56,7 +56,7 @@ Node * allocate_node(void * item, size_t data_size){
 	return new;
 }
 
-void list_push_back(List * list,void * item){
+bool list_push_back(List * list,void * item){
 	if(list!=NULL){
 		Node * new = allocate_node(item,list->data_size);	
 		if(!list_empty(list))
@@ -66,10 +66,25 @@ void list_push_back(List * list,void * item){
 		new->next=NULL;
 		list->end = new;
 		list->size++;
+		return true;
 	}
+	return false;
 }
 
-void list_push_front(List * list, void * item){
+void * list_front(List * list){
+	if(list != NULL && !list_empty(list))
+		return list->begin->content;
+	return NULL;
+}
+
+void * list_back(List * list){
+	if(list != NULL && !list_empty(list))
+		return list->end->content;
+	return NULL;
+}
+
+
+bool list_push_front(List * list, void * item){
 	if(list!=NULL){
 		Node * new = allocate_node(item,list->data_size);
 		if(!list_empty(list))
@@ -80,10 +95,23 @@ void list_push_front(List * list, void * item){
 		}
 		list->begin = new;
 		list->size++;
+		return true;
 	}
+	return false;
 }
 
-
+void list_print(List* list, void (*printer_function)(void *)){
+	if(list != NULL && !list_empty(list)){
+		Node * aux = list->begin;
+		while(aux != NULL){
+			(*printer_function)(aux->content);
+			aux=aux->next;
+		}
+		printf("\n");
+		return;
+	}
+	printf("Non initialized or empty listy!");
+}
 
 
 
