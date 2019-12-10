@@ -20,10 +20,13 @@ bool list_push_front(List* list, void * item);
 void * list_front(List * list);
 void * list_back(List * list);
 
+void list_pop_front(List * list);
+void list_pop_back(List * list);
+
 
 //!< uses you own print function based on data type
 void list_print(List* list, void (*printer_function)(void *) );
-
+void list_reverse_print(List* list,void (*printer_function)(void *));
 
 int list_size(List * list);
 bool list_empty(List * list);

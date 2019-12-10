@@ -5,6 +5,7 @@
 typedef struct node_{
 	void * content;
 	struct node_ * next;
+	struct node_ * prev;
 }Node;
 
 struct list_{
@@ -64,6 +65,7 @@ bool list_push_back(List * list,void * item){
 		else
 			list->begin = new;
 		new->next=NULL;
+		new->prev=list->end;
 		list->end = new;
 		list->size++;
 		return true;
@@ -84,15 +86,52 @@ void * list_back(List * list){
 }
 
 
+
+
+void list_pop_front(List * list){
+	if(list!=NULL && !list_empty(list)){
+		Node * p = list->begin;
+		list->begin=list->begin->next;
+		if(p == list->end){
+			list->end = NULL;	
+		}
+		else{	
+			list->begin->prev=NULL;
+		}
+		deallocate(&(p->content));
+		deallocate((void **)&p);
+		list->size--;
+	}
+}
+
+void list_pop_back(List * list){
+	if(list!= NULL && !list_empty(list)){
+		Node * p = list->end;
+		list->end = list->end->prev;
+		if(p == list->begin){
+			list->begin = NULL;
+		}
+		else
+			list->end->next = NULL;
+		deallocate(&(p->content));
+		deallocate((void **)&p);
+		list->size--;
+	}
+}
+
+
 bool list_push_front(List * list, void * item){
 	if(list!=NULL){
 		Node * new = allocate_node(item,list->data_size);
-		if(!list_empty(list))
+		if(!list_empty(list)){
 			new->next = list->begin;
+			list->begin->prev=new;
+		}
 		else{
 			list->end=new;		
 			new->next=NULL;
 		}
+		new->prev=NULL;
 		list->begin = new;
 		list->size++;
 		return true;
@@ -110,10 +149,21 @@ void list_print(List* list, void (*printer_function)(void *)){
 		printf("\n");
 		return;
 	}
-	printf("Non initialized or empty listy!");
+	printf("Non initialized or empty listy!\n");
 }
 
-
+void list_reverse_print(List* list, void (*printer_function)(void *)){
+	if(list !=NULL && !list_empty(list)){
+		Node * aux = list->end;
+		while(aux != NULL){
+			(*printer_function)(aux->content);
+			aux=aux->prev;
+		}
+		printf("\n");
+		return;
+	}
+	printf("Non initialized or empty listy!\n");
+}
 
 
 
