@@ -16,6 +16,7 @@ void erase_list(List ** ptr);
 //!<  ***alwayss*** use item as a var in the client program
 bool list_push_back(List* list,  void * item);
 bool list_push_front(List* list, void * item);
+bool list_insert(List* list, void * item,int index);
 
 void * list_front(List * list);
 void * list_back(List * list);

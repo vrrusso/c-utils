@@ -104,6 +104,7 @@ void list_pop_front(List * list){
 	}
 }
 
+
 void list_pop_back(List * list){
 	if(list!= NULL && !list_empty(list)){
 		Node * p = list->end;
@@ -137,6 +138,10 @@ bool list_push_front(List * list, void * item){
 		return true;
 	}
 	return false;
+}
+
+bool list_insert(List* list,void * item,int index){
+	return true;
 }
 
 void list_print(List* list, void (*printer_function)(void *)){
