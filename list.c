@@ -149,6 +149,7 @@ void list_print(List* list, void (*printer_function)(void *)){
 		Node * aux = list->begin;
 		while(aux != NULL){
 			(*printer_function)(aux->content);
+			printf("->");
 			aux=aux->next;
 		}
 		printf("\n");
