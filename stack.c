@@ -23,7 +23,8 @@ Stack * create_stack(size_t content_size){
 }
 
 void erase_stack(Stack ** ptr){
-	deallocate((*ptr)->array);
-	deallocate((void *)ptr);
+	//deallocate((void **)(*ptr)->array);
+	free((*ptr)->array);//i dont know why but i cannot use my made up function - whatever
+	deallocate((void **)ptr);
 	ptr=NULL;
 }
