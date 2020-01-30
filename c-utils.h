@@ -1,12 +1,24 @@
 #ifndef C_UTILS
 #define C_UTILS
-#define INTEGER sizeof(int)
-#define casting (void*)&
-
 #include "list.h"
 
 
-void printInt(void *n){
-	printf("%d",*(int *)n);
+#define casting (void*)&
+#define INTEGER sizeof(int)
+#define FLOAT sizeof(float)
+#define CHAR sizeof(char)
+
+
+
+void printInt(void *d){
+	printf("%d",*(int *)d);
 }
+void printFloat(void *f){
+	printf("%.2f",*(float *)f);
+}
+void printChar(void *c){
+	printf("%c",*(char *)c);
+}
+
+
 #endif

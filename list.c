@@ -37,6 +37,7 @@ void erase_nodes(Node * begin){
 void erase_list(List ** ptr){
 	erase_nodes((*ptr)->begin);
 	deallocate((void *)ptr);
+		ptr=NULL;
 }
 
 bool list_empty(List * list){
